@@ -1,8 +1,13 @@
 name: build-and-deploy
+
 on: [push]
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # Check out website repository
       - uses: actions/checkout@v3
-      - run: npm install
+
+      - name: Install dependencies
+        run: npm install
