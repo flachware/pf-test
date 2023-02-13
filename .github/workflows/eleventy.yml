@@ -1,5 +1,5 @@
 # Simple workflow for deploying Eleventy to GitHub Pages
-name: Deploy Eleventy to Pages
+name: Deploy Eleventy to GitHub Pages
 
 on:
   # Runs on pushes targeting the default branch
