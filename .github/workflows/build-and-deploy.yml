@@ -1,6 +1,9 @@
 name: build-and-deploy
 
-on: [push]
+on:
+  push:
+    branches:
+      main
 
 jobs:
   build:
@@ -14,3 +17,20 @@ jobs:
 
       - name: Run Eleventy
         run: npx @11ty/eleventy
+
+      - name: Init new repo in site folder and commit its files
+        run: |
+          cd _site
+          git init
+          git add -A
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git commit -m 'deploy'
+
+      - name: Push to GitHub Pages branch
+        uses: ad-m/github-push-action@v0.6.0
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            branch: gh-pages
+            force: true
+            directory: ./_site
